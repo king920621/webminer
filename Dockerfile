@@ -6,16 +6,17 @@ RUN apk add --no-cache curl
 # 複製自定義 Nginx 配置
 COPY nginx.conf /etc/nginx/nginx.conf
 
-# 複製網站文件到 Nginx 的默認目錄
+# 複製網站文件和 ads.txt
 COPY index.html /usr/share/nginx/html/index.html
+COPY ads.txt /usr/share/nginx/html/ads.txt
 
 # 創建健康檢查端點
 RUN echo "OK" > /usr/share/nginx/html/health
 
-# 暴露端口 80 和 8000
+# 暴露端口
 EXPOSE 80 8000
 
-# 健康檢查 - 使用 8000 端口
+# 健康檢查
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:8000/health || exit 1
 
