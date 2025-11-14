@@ -6,7 +6,8 @@
     <!-- 广告商验证标签 -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-7591764809175748"
      crossorigin="anonymous"></script>
-    <title>網頁挖礦</title>
+    <title data-lang="zh-TW">網頁挖礦</title>
+    <title data-lang="zh-CN" style="display:none">网页挖矿</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -136,7 +137,8 @@
 </head>
 <body>
     <header>
-        <h1>🙏 網頁挖礦！</h1>
+        <h1 data-lang="zh-TW">⛏️ 網頁挖礦！</h1>
+        <h1 data-lang="zh-CN" style="display:none">⛏️ 网页挖矿！</h1>
         <div class="language-switcher">
             <button class="lang-btn active" onclick="switchLanguage('zh-TW')">繁中</button>
             <button class="lang-btn" onclick="switchLanguage('zh-CN')">简中</button>
@@ -361,6 +363,14 @@
                 }
             });
             
+            // 更新網頁標題
+            const titles = document.querySelectorAll('title[data-lang]');
+            titles.forEach(title => {
+                if (title.getAttribute('data-lang') === lang) {
+                    document.title = title.textContent;
+                }
+            });
+            
             // 更新按鈕文字
             document.querySelectorAll('[data-text-zh-TW]').forEach(button => {
                 if (lang === 'zh-TW') {
@@ -430,6 +440,15 @@
                     <br><small>${stopText}</small>
                 `;
                 statusElement.style.borderLeftColor = currentMode.color;
+            } else {
+                const waitingText = currentLanguage === 'zh-TW' ? 
+                    '請輸入錢包地址並選擇強度開始挖礦' : 
+                    '请输入钱包地址并选择强度开始挖矿';
+                const statusLabel = currentLanguage === 'zh-TW' ? '狀態:' : '状态:';
+                
+                statusElement.innerHTML = `
+                    <strong>${statusLabel}</strong> ${waitingText}
+                `;
             }
         }
         
