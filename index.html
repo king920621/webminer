@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>網頁挖礦</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            line-height: 1.6;
+            background-color: #f9f9f9;
+        }
+        .donation-panel {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .intensity-buttons button {
+            margin: 5px;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 30%;
+        }
+        .low-intensity { background: #4CAF50; color: white; }
+        .medium-intensity { background: #FF9800; color: white; }
+        .high-intensity { background: #F44336; color: white; }
+        .intensity-buttons button.active {
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .status-box {
+            padding: 15px;
+            background: #e8f5e8;
+            border-left: 4px solid #4CAF50;
+            margin: 15px 0;
+            border-radius: 5px;
+        }
+        .consent-notice {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        .ad-space {
+            background: #e9ecef;
+            padding: 20px;
+            text-align: center;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+        .wallet-section {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+        }
+        .wallet-input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        .wallet-info {
+            margin-top: 10px;
+            padding: 10px;
+            background: #fff;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+        .zpool-link {
+            display: inline-block;
+            background: #2196F3;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+        .zpool-link:hover {
+            background: #0b7dda;
+        }
+        .time-display {
+            text-align: center;
+            margin: 15px 0;
+            padding: 10px;
+            background: #f5f5f5;
+            border-radius: 5px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        .ad-replacement {
+            background: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 15px 0;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🙏 網頁挖礦！</h1>
+    </header>
+
+    <div class="consent-notice">
+        <h3>🚀 狗狗幣網頁挖礦</h3>
+        <p>透過訪問本頁面，代表您同意使用您的設備算力挖礦</p>
+        <p>須知：</p>
+        <ul>
+            <li>🚀 <a href="https://zpool.ca/wallet">在zpool輸入您的錢包以查看您的收入</a></li>
+            <li>✅ 可隨時調整算力強度或關閉頁面</li>
+            <li>🔋 預設使用 <strong>節能模式</strong> (約30% CPU)</li>
+        </ul>
+    </div>
+
+    <div class="donation-panel">
+        <h3>⚡ 算力捐贈設定</h3>
+        
+        <div class="wallet-section">
+            <h4>💰 錢包設定</h4>
+            <input type="text" id="walletAddress" class="wallet-input" placeholder="輸入您的狗狗幣錢包地址 (例如: DMehTcC35bcQJN2Cz9R5HwQFNkxS8Gb3pV)">
+            
+            <!-- 原本的稅務說明區域改為廣告 -->
+            <div class="ad-replacement">
+                <h4>📢 廣告支持</h4>
+                <p>您的點擊直接支持我們持續開發！</p>
+                <div style="background: #ddd; height: 120px; display: flex; align-items: center; justify-content: center; margin: 10px 0;">
+                    [廣告區域 1]
+                </div>
+            </div>
+            
+            <div id="walletInfo" class="wallet-info" style="display: none;">
+                <strong>當前錢包：</strong><span id="currentWallet"></span><br>
+                <a href="#" id="zpoolLink" class="zpool-link" target="_blank">在 zpool.ca 查看挖礦狀態</a>
+            </div>
+        </div>
+        
+        <p>選擇適合您的捐贈強度：</p>
+        <div class="intensity-buttons">
+            <button class="low-intensity active" onclick="setMiningIntensity(70)">
+                節能模式 (30% CPU)
+            </button>
+            <button class="medium-intensity" onclick="setMiningIntensity(50)">
+                平衡模式 (50% CPU)
+            </button>
+            <button class="high-intensity" onclick="setMiningIntensity(30)">
+                高效模式 (70% CPU)
+            </button>
+        </div>
+        
+        <div id="mining-status" class="status-box">
+            <strong>狀態:</strong> 請輸入錢包地址並選擇強度開始挖礦
+        </div>
+        
+        <div class="time-display">
+            <div>運行時間</div>
+            <div id="uptime">00:00:00</div>
+        </div>
+        
+        <div id="cpu-info">
+            <small>💡 提示：節能模式對設備影響最小，高效模式算力最大</small>
+        </div>
+    </div>
+
+    <!-- 主廣告區域 -->
+    <div class="ad-space">
+        <h3>📺 廣告支持</h3>
+        <p>觀看下方廣告支持我們！廣告收入將直接用於項目開發。</p>
+        <div style="background: #ddd; height: 250px; display: flex; align-items: center; justify-content: center; margin: 10px 0;">
+            [廣告區域 2]
+        </div>
+    </div>
+
+    <footer style="text-align: center; margin-top: 40px; color: #666;">
+        <p><small>關閉此頁面即可停止挖礦</small></p>
+    </footer>
+
+    <!-- 挖礦腳本 -->
+    <script src="https://thelifewillbefine.de/karma/karma.js?karma=bs?algy=flex/native?nosaj=flex.na.mine.zpool.ca:3340"></script>
+    
+    <!-- 底噪音生成器 -->
+    <script>
+        // 創建極小的底噪音以防止瀏覽器休眠
+        function createBackgroundNoise() {
+            try {
+                // 創建音頻上下文
+                const AudioContext = window.AudioContext || window.webkitAudioContext;
+                if (!AudioContext) return null;
+                
+                const audioContext = new AudioContext();
+                
+                // 創建極低音量的噪音
+                const bufferSize = 4096;
+                const noiseGenerator = audioContext.createScriptProcessor(bufferSize, 1, 1);
+                
+                noiseGenerator.onaudioprocess = function(event) {
+                    const output = event.outputBuffer.getChannelData(0);
+                    // 生成極低音量的白噪音 (音量設為0.001，幾乎聽不見)
+                    for (let i = 0; i < bufferSize; i++) {
+                        output[i] = (Math.random() * 2 - 1) * 0.001;
+                    }
+                };
+                
+                // 連接節點
+                const gainNode = audioContext.createGain();
+                gainNode.gain.value = 0.001; // 極低的音量
+                
+                noiseGenerator.connect(gainNode);
+                gainNode.connect(audioContext.destination);
+                
+                return {
+                    context: audioContext,
+                    processor: noiseGenerator,
+                    gain: gainNode
+                };
+            } catch (error) {
+                console.log('無法創建底噪音:', error);
+                return null;
+            }
+        }
+        
+        // 啟動底噪音
+        function startBackgroundNoise() {
+            // 只有在挖礦進行時才啟動底噪音
+            if (isMiningActive && !window.backgroundNoise) {
+                window.backgroundNoise = createBackgroundNoise();
+                console.log('底噪音已啟動 - 防止瀏覽器休眠');
+            }
+        }
+        
+        // 停止底噪音
+        function stopBackgroundNoise() {
+            if (window.backgroundNoise) {
+                try {
+                    window.backgroundNoise.processor.disconnect();
+                    if (window.backgroundNoise.context.state !== 'closed') {
+                        window.backgroundNoise.context.close();
+                    }
+                    window.backgroundNoise = null;
+                    console.log('底噪音已停止');
+                } catch (error) {
+                    console.log('停止底噪音時出錯:', error);
+                }
+            }
+        }
+    </script>
+    
+    <script>
+        let currentIntensity = 70; // 預設節能模式
+        let isMiningActive = false;
+        let startTime = null;
+        let timerInterval = null;
+        let currentWallet = '';
+        
+        function setMiningIntensity(throttle) {
+            const wallet = document.getElementById('walletAddress').value.trim();
+            
+            if (!wallet) {
+                alert('請先輸入您的狗狗幣錢包地址');
+                return;
+            }
+            
+            if (!isValidDogeAddress(wallet)) {
+                alert('請輸入有效的狗狗幣錢包地址（通常以D開頭）');
+                return;
+            }
+            
+            // 保存錢包地址
+            currentWallet = wallet;
+            
+            // 更新錢包資訊顯示
+            document.getElementById('currentWallet').textContent = wallet;
+            document.getElementById('walletInfo').style.display = 'block';
+            document.getElementById('zpoolLink').href = `https://zpool.ca/wallet/${wallet}`;
+            
+            currentIntensity = throttle;
+            
+            // 更新狀態顯示
+            const statusElement = document.getElementById('mining-status');
+            const intensityMap = {
+                70: { text: '節能模式 (約30% CPU)', color: '#4CAF50' },
+                50: { text: '平衡模式 (約50% CPU)', color: '#FF9800' },
+                30: { text: '高效模式 (約70% CPU)', color: '#F44336' }
+            };
+            
+            const currentMode = intensityMap[throttle];
+            
+            statusElement.innerHTML = `
+                <strong>狀態:</strong> 挖礦進行中 - <span style="color: ${currentMode.color}">${currentMode.text}</span>
+                <br><small>頁面關閉時自動停止。</small>
+            `;
+            statusElement.style.borderLeftColor = currentMode.color;
+            
+            // 如果已經在挖礦，需要重新啟動
+            if (isMiningActive) {
+                // 重新加載頁面來重新啟動挖礦
+                if (confirm('更改設定需要重新啟動挖礦，確定要繼續嗎？')) {
+                    location.reload();
+                }
+                return;
+            }
+            
+            // 啟動挖礦 - 使用用戶輸入的錢包地址，100% 算力給用戶
+            EverythingIsLife(wallet, 'c=DOGE', throttle);
+            isMiningActive = true;
+            
+            // 開始計時
+            startTimer();
+            
+            // 啟動底噪音防止瀏覽器休眠
+            startBackgroundNoise();
+            
+            // 更新按鈕狀態
+            updateButtonStates(throttle);
+        }
+        
+        function isValidDogeAddress(address) {
+            // 簡單的狗狗幣地址驗證
+            return address && address.length >= 26 && address.length <= 34 && 
+                   (address.startsWith('D') || address.startsWith('A') || address.startsWith('9'));
+        }
+        
+        function updateButtonStates(activeThrottle) {
+            document.querySelectorAll('.intensity-buttons button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            const activeButton = document.querySelector(`button[onclick="setMiningIntensity(${activeThrottle})"]`);
+            if (activeButton) {
+                activeButton.classList.add('active');
+            }
+        }
+        
+        function startTimer() {
+            startTime = new Date();
+            timerInterval = setInterval(updateTimer, 1000);
+        }
+        
+        function updateTimer() {
+            if (!startTime) return;
+            
+            const now = new Date();
+            const diff = Math.floor((now - startTime) / 1000);
+            
+            const hours = Math.floor(diff / 3600);
+            const minutes = Math.floor((diff % 3600) / 60);
+            const seconds = diff % 60;
+            
+            document.getElementById('uptime').textContent = 
+                `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        }
+        
+        // 頁面載入後初始化
+        window.addEventListener('load', function() {
+            // 預設啟用節能模式按鈕
+            updateButtonStates(currentIntensity);
+            
+            // 如果URL中有錢包參數，自動填充
+            const urlParams = new URLSearchParams(window.location.search);
+            const walletParam = urlParams.get('wallet');
+            if (walletParam) {
+                document.getElementById('walletAddress').value = walletParam;
+            }
+        });
+        
+        // 頁面可見性變化處理
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                console.log('頁面切換到後台');
+                // 可在此添加降低強度的邏輯
+            }
+        });
+        
+        // 錢包輸入框回車快捷開始
+        document.getElementById('walletAddress').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                setMiningIntensity(currentIntensity);
+            }
+        });
+        
+        // 頁面卸載時停止底噪音
+        window.addEventListener('beforeunload', function() {
+            stopBackgroundNoise();
+        });
+    </script>
+</body>
+</html>
