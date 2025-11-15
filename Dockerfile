@@ -8,6 +8,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 # 複製網站文件和驗證文件
 COPY index.html /usr/share/nginx/html/index.html
+COPY index.html /usr/share/nginx/html/ad.html
 COPY 96bded8565f88b7084e3.txt /usr/share/nginx/html/96bded8565f88b7084e3.txt
 
 # 創建健康檢查端點
