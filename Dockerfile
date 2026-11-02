@@ -10,6 +10,8 @@ COPY nginx.conf /etc/nginx/nginx.conf
 COPY index.html /usr/share/nginx/html/index.html
 COPY webminer/ /usr/share/nginx/html/webminer/
 COPY 96bded8565f88b7084e3.txt /usr/share/nginx/html/96bded8565f88b7084e3.txt
+COPY sitemap.xml /usr/share/nginx/html/sitemap.xml
+COPY robots.txt /usr/share/nginx/html/robots.txt
 
 # 創建健康檢查端點
 RUN echo "OK" > /usr/share/nginx/html/health
