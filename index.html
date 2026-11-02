@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WS PR卡價格表 | 當期比賽包・Climax賽PR卡價格查詢</title>
+<meta name="description" content="提供 Weiss Schwarz (WS) 當期比賽包 PR 卡與 Climax 賽（系列賽）PR 卡的最新售價一覽。定期更新日本 Yuyu-tei（遊々亭）販售價格。">
+<meta name="keywords" content="WS PR卡,比賽包PR卡,Climax賽PR卡,卡牌價格,Yuyu-tei,遊々亭,WS卡價,卡牌查價">
+<link rel="canonical" href="https://nntrwebminer.com">
+
+<!-- ========== 結構化資料 ========== -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "WS 近期PR卡片價格表",
+  "alternateName": ["WS PR卡價格表", "WS PRカード価格表"],
+  "url": "https://ad.nntrwebminer.com/",
+  "description": "提供 Weiss Schwarz (WS) 當期比賽包 PR 卡與 Climax 賽（系列賽）PR 卡的最新售價一覽，資料來源為日本 Yuyu-tei（遊々亭）。",
+  "inLanguage": ["zh-TW", "zh-CN", "ja"],
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://ad.nntrwebminer.com/?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
+
+<style>
+  body {
+    font-family: -apple-system, "Microsoft JhengHei", "Noto Sans CJK TC", sans-serif;
+    background: #ffffff;
+    margin: 0;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: #000;
+  }
+
+  /* 網站主標題與副標 */
+  header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  header h1 {
+    font-size: 48px;
+    font-weight: 900;
+    margin: 0 0 10px 0;
+    letter-spacing: 2px;
+  }
+  header .subtitle {
+    font-size: 18px;
+    color: #666;
+    margin: 0;
+  }
+
+  /* 每個區塊的容器 */
+  .section {
+    width: 100%;
+    max-width: 1400px;
+    margin-bottom: 60px;
+  }
+
+  /* 區塊標題 */
+  .section-title {
+    font-size: 36px;
+    font-weight: 900;
+    margin: 0 0 20px 0;
+    text-align: center;
+    letter-spacing: 2px;
+    color: #000;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 4px;
+  }
+
+  th {
+    background-color: #a4b3ea;
+    color: #000;
+    font-weight: bold;
+    font-size: 18px;
+    padding: 18px 10px;
+    text-align: center;
+    border: none;
+    white-space: nowrap;
+  }
+
+  td {
+    background-color: #e2e7fb;
+    padding: 18px 10px;
+    text-align: center;
+    font-size: 18px;
+    font-weight: bold;
+    color: #000;
+    border: none;
+  }
+
+  th:nth-child(1), td:nth-child(1) { width: 20%; }
+  th:nth-child(2), td:nth-child(2) { width: 20%; }
+  th:nth-child(3), td:nth-child(3) { width: 42%; }
+  th:nth-child(4), td:nth-child(4) { width: 10%; }
+  th:nth-child(5), td:nth-child(5) { width: 8%; }
+
+  #error-msg {
+    color: #c0392b;
+    font-size: 16px;
+    margin-top: 20px;
+    display: none;
+  }
+
+  /* 頁尾說明區塊 */
+  .about {
+    width: 100%;
+    max-width: 1400px;
+    margin-top: 40px;
+    padding: 30px 20px;
+    border-top: 2px solid #e2e7fb;
+    color: #333;
+    line-height: 1.8;
+    font-size: 15px;
+  }
+  .about h2 {
+    font-size: 22px;
+    margin: 0 0 20px 0;
+    color: #000;
+  }
+  .about h3 {
+    font-size: 17px;
+    margin: 20px 0 6px 0;
+    color: #444;
+  }
+  .about p {
+    margin: 0 0 8px 0;
+  }
+
+  footer {
+    width: 100%;
+    max-width: 1400px;
+    margin-top: 20px;
+    padding: 20px;
+    text-align: center;
+    color: #888;
+    font-size: 13px;
+    border-top: 1px solid #eee;
+  }
+</style>
+</head>
+<body>
+  <header>
+    <h1>WS 近期PR卡片價格表</h1>
+    <p class="subtitle">
+      Weiss Schwarz 比賽包 PR 卡・Climax 賽 PR 卡售價一覽
+    </p>
+  </header>
+
+  <main style="width: 100%; display: flex; flex-direction: column; align-items: center;">
+    <div id="content-container" style="width: 100%; max-width: 1400px;">
+      <div style="text-align:center; font-size:24px;">載入中...</div>
+    </div>
+    <div id="error-msg">無法讀取 data.json，請確認檔案是否存在。</div>
+  </main>
+
+  <!-- 頁尾純中文說明 -->
+  <section class="about">
+    <h2>關於本站</h2>
+    <p>本頁彙整 Weiss Schwarz（WS）近期發行的 <strong>比賽包 PR 卡</strong>與 <strong>Climax 賽（系列賽）PR 卡</strong>之售價一覽，並定期更新日本 Yuyu-tei 的販售價格。</p>
+    <p>PR 卡通常透過官方比賽、活動或店家配布取得，發行量有限，在二級市場上價格波動較大。本表單提供快速查詢的參考依據，方便玩家掌握市場行情。</p>
+    <p>價格單位為日圓（円），資料僅供參考，實際售價與庫存請以 Yuyu-tei 官方網站為準。</p>
+  </section>
+
+  <footer>
+    <p>資料來源：Yuyu-tei｜最後更新：<span id="last-updated"></span>｜價格僅供參考，實際以官方網站為準</p>
+    <p>&copy; 2026 WS 近期PR卡片價格表</p>
+  </footer>
+  <script>
+function renderTable(cards) {
+  if (!cards || cards.length === 0) {
+    return '<div style="text-align:center; padding:20px; color:#888;">目前沒有卡片資料</div>';
+  }
+
+  const rows = cards.map(card => `
+    <tr>
+      <td>${card.series || ''}</td>
+      <td>${card.id || ''}</td>
+      <td>${card.name || ''}</td>
+      <td>${card.price != null ? card.price + ' 円' : ''}</td>
+      <td>${card.rarity || ''}</td>
+    </tr>
+  `).join('');
+
+  // 【重點】將表頭改為純中文
+  return `
+    <table>
+      <thead>
+        <tr>
+          <th>作品</th>
+          <th>卡號</th>
+          <th>卡名</th>
+          <th>卡價</th>
+          <th>版本</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${rows}
+      </tbody>
+    </table>
+  `;
+}
+
+async function loadData() {
+  try {
+    //datajson
+    const rawGithubUrl = 'https://raw.githubusercontent.com/king920621/ad/main/public/data.json';
+    
+    // 加上時間戳記避免瀏覽器快取
+    const res = await fetch(rawGithubUrl + '?t=' + Date.now());
+    const data = await res.json();
+
+    const container = document.getElementById('content-container');
+    container.innerHTML = '';
+
+    if (data.sections && Array.isArray(data.sections)) {
+      data.sections.forEach(section => {
+        const sectionDiv = document.createElement('div');
+        sectionDiv.className = 'section';
+
+        const titleEl = document.createElement('h2');
+        titleEl.className = 'section-title';
+        titleEl.textContent = section.title || '未命名區塊';
+
+        const tableHtml = renderTable(section.cards);
+
+        sectionDiv.appendChild(titleEl);
+        sectionDiv.insertAdjacentHTML('beforeend', tableHtml);
+        container.appendChild(sectionDiv);
+      });
+    }
+
+    if (data.lastUpdated) {
+      document.getElementById('last-updated').textContent = data.lastUpdated;
+    }
+
+  } catch (error) {
+    console.error('讀取資料失敗:', error);
+    document.getElementById('content-container').innerHTML = '';
+    document.getElementById('error-msg').style.display = 'block';
+  }
+}
+
+loadData();
+</script>
