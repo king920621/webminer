@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- 1. 新的首頁：純中文卡表 -->
   <url>
-    <loc>https://ad.nntrwebminer.com/</loc>
+    <loc>https://nntrwebminer.com/</loc>
     <lastmod>2026-11-02</lastmod> <!-- 請改成今天的日期 -->
     <changefreq>daily</changefreq>
     <priority>1.0</priority>
@@ -10,7 +10,7 @@
   
   <!-- 2. 舊的網頁：現在位於子目錄 -->
   <url>
-    <loc>https://ad.nntrwebminer.com/webminer/</loc>
+    <loc>https://nntrwebminer.com/webminer/</loc>
     <lastmod>2026-11-02</lastmod> <!-- 請改成今天的日期 -->
     <changefreq>weekly</changefreq> <!-- 頻率可以設低一點 -->
     <priority>0.8</priority>
